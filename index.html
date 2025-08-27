@@ -49,11 +49,27 @@
       transform: translateY(0);
     }
     #home {
-      background: linear-gradient(120deg, #0d1117, #161b22);
-      color: #fff;
+      background: linear-gradient(270deg, #ff6ec4, #7873f5, #4ade80);
+      background-size: 600% 600%;
+      animation: gradientAnimation 16s ease infinite;
     }
-    #projects { background: #161b22; }
-    #contact { background: #0d1117; }
+
+    @keyframes gradientAnimation {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+}
+
+    #projects { 
+      background: linear-gradient(135deg, #667eea, #764ba2); 
+      color: white;
+      padding: 100px 20px;
+     }
+    #contact { 
+      background: #0d1117;
+      color: white;
+      padding: 100px 20px; 
+    }
 
     /* Buttons */
     .btn {
@@ -88,8 +104,8 @@
       transition: transform 0.3s;
     }
     .project-card:hover { 
-        transform: scale(1.05) translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        transform: scale(1.07) translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.5);
         transition: all 0.3s ease;
      }
 
@@ -109,11 +125,30 @@
     body.light-mode {
   background: #f4f4f9;
   color: #222;
+  transition: background 0.5s, color 0.5s;
 }
 body.light-mode .project-card {
   background: #fff;
   color: #222;
+  transition: background 0.5s, color 0.5s transform 0.3s;
 }
+
+.social-icons a {
+  color: #333;
+  font-size: 30px;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #0077b5; /* Example: LinkedIn blue */
+  transform: scale(1.2);
+}
+#resume{
+  background: #6a38f4;
+  padding: 100px 20px;
+}
+
 </style>
   <!-- Typed.js CDN -->
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
@@ -130,14 +165,23 @@ body.light-mode .project-card {
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
       <a href="#contact">Contact</a>
+      <a href="#resume">Resume</a>
+
     </nav>
     
     
   </header>
 
+<button id="theme-toggle" class="btn" style="position:fixed; top:20px; right:20px;">🌙</button>
+
 
   <section id="home">
   <h2>Hi, I'm Ravi 👋</h2>
+  <div class="social-icons" style="display:flex; gap:15px; justify-content:center; margin-top:20px;">
+  <a href="https://github.com/RaviKumarPal212" target="_blank">GitHub</a>
+  <a href="https://www.linkedin.com/in/ravi-kumar-pal-36829630a/" target="_blank">LinkedIn</a>
+  <a href="https://www.instagram.com/ravi_kumar_pal43/" target="_blank">Instagram</a>
+</div>
   <!-- Typing Animation -->
   <h3>
     <span id="typed"></span>
@@ -184,13 +228,22 @@ body.light-mode .project-card {
     </div>
   </div>
 </section>
+
+
+
   
 <section id="projects" data-aos="fade-left">
   <h2>Projects</h2>
+  <div class="project-filters" style="text-align:center; margin-bottom:20px;">
+  <button onclick="filterProjects('all')">All</button>
+  <button onclick="filterProjects('web')">Web</button>
+  <button onclick="filterProjects('cpp')">C++</button>
+</div>
   <div class="projects-container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1000px; margin:20px auto;">
     
+    
     <!-- Project 1 -->
-    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);">
+    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);" data-category="web">
       <h3>Portfolio Website</h3>
       <p>My first personal portfolio built with HTML, CSS, and JS.</p>
       <a href="https://github.com/ravi/portfolio" target="_blank" style="margin-right:10px;">📂 GitHub</a>
@@ -198,7 +251,7 @@ body.light-mode .project-card {
     </div>
 
     <!-- Project 2 -->
-    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);">
+    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);" data-category="web">
       <h3>Chatbot</h3>
       <p>A simple AI chatbot to ask queries.</p>
       <a href="https://github.com/RaviKumarPal212/studious-journey.git" target="_blank" style="margin-right:10px;">📂 GitHub</a>
@@ -206,7 +259,7 @@ body.light-mode .project-card {
     </div>
 
     <!-- Project 3 -->
-    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);">
+    <div class="project-card" style="background:#0d1117; padding:20px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.4); text-align:center; transform: scale(1.05);" data-category="cpp">
       <h3>Blog Website</h3>
       <p>A simple blog system where users can read and post articles.</p>
       <a href="https://github.com/ravi/blog-site" target="_blank" style="margin-right:10px;">📂 GitHub</a>
@@ -230,6 +283,8 @@ body.light-mode .project-card {
       <button type="submit" class="btn">Send Message</button>
     </form>
   </div>
+  <div id="toast" style="position:fixed; bottom:20px; right:20px; background:#4ade80; padding:10px 20px; border-radius:8px; display:none; color:#000;">Message Sent!</div>
+
 </section>
 
 <section id="resume" data-aos="zoom-in">
@@ -238,8 +293,15 @@ body.light-mode .project-card {
     <p>You can download my latest resume here:</p>
     <a href="Ravi_Resume.pdf" download>
       <button class="btn">Download CV</button>
+      <button onclick="document.getElementById('resumeModal').style.display='block'">Preview CV</button>
     </a>
   </div>
+  <div id="resumeModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8);">
+  <div style="margin:50px auto; background:#fff; padding:20px; width:80%; height:80%; overflow:auto;">
+    <iframe src="Ravi_Resume.pdf" style="width:100%; height:100%;"></iframe>
+    <button onclick="document.getElementById('resumeModal').style.display='none'">Close</button>
+  </div>
+</div>
 </section>
 
 
@@ -284,10 +346,10 @@ body.light-mode .project-card {
     
     emailjs.sendForm('service_pb45h2a', 'template_j3bl45r', this)
       .then(() => {
-        alert("Message sent successfully!");
+        showToast("Message sent successfully!");
         this.reset();
       }, (err) => {
-        alert("Failed to send message. Try again later.");
+        showToast("Failed to send message. Try again later.");
         console.error(err);
       });
   });
@@ -303,8 +365,6 @@ body.light-mode .project-card {
   });
 </script>
 
-  <button id="theme-toggle" class="btn" style="position:fixed; top:20px; right:20px;">🌙</button>
-
 <!-- Dark/Light Mode Script -->
   <script>
     const toggleBtn = document.getElementById('theme-toggle');
@@ -317,7 +377,30 @@ body.light-mode .project-card {
       }
     });
   </script>
-  
+
+  <script>
+function filterProjects(category){
+  const projects = document.querySelectorAll('.project-card');
+  projects.forEach(p => {
+    if(category === 'all' || p.dataset.category === category){
+      p.style.display = 'block';
+    } else {
+      p.style.display = 'none';
+    }
+  });
+}
+</script>
+<script>
+// Toast notification for contact form submission
+  function showToast() {
+  const toast = document.getElementById('toast');
+  toast.style.display = 'block';
+  setTimeout(() => toast.style.display = 'none', 3000);
+}
+
+// Replace alert() in EmailJS success with showToast()
+
+</script>
+
 </body>
 </html>
-
